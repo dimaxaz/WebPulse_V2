@@ -2,15 +2,25 @@
 
 namespace App\Services;
 
+use App\Events\NewMessageEvent;
+use Junges\Kafka\Facades\Kafka;
+use Junges\Kafka\Message\Message;
+
 class KafkaService
 {
-    public function produce($topic, $message)
+    public function produceMessage(string $message): void
     {
-        // Конфигурация продюсера
-    }
+        $messageData = [
+            'text' => $message,
+            'timestamp' => now()->timestamp,
+        ];
 
-    public function consume($topic)
-    {
-        // Конфигурация консьюмера
+        // Отправляем в Kafka
+        Kafka::publishOn(config('kafka.topics.messages'))
+            ->withMessage(new Message(body: $messageData))
+            ->send();
+
+        // Отправляем WebSocket событие
+        event(new NewMessageEvent($messageData));
     }
 } 

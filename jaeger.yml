@@ -1,0 +1,20 @@
+agent:
+  enabled: true
+  daemonset:
+    useHostPort: true
+
+collector:
+  enabled: true
+  service:
+    type: NodePort
+
+query:
+  enabled: true
+  service:
+    type: NodePort
+
+ingester:
+  enabled: false
+
+storage:
+  type: memory 

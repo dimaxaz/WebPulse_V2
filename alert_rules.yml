@@ -1,0 +1,29 @@
+groups:
+- name: sensor_service_alerts
+  rules:
+  - alert: HighBufferUsage
+    expr: sensor_service_buffer_size > 70000
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: High buffer usage
+      description: Buffer size is {{ $value }}
+
+  - alert: KafkaLag
+    expr: sensor_service_kafka_lag > 1000
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: High Kafka lag
+      description: Kafka lag is {{ $value }}
+
+  - alert: SensorOffline
+    expr: sensor_status == 0
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: Sensor offline
+      description: Sensor {{ $labels.sensor_id }} is offline 

@@ -1,0 +1,52 @@
+{
+  "version": "7.x",
+  "objects": [
+    {
+      "id": "search-metrics",
+      "type": "visualization",
+      "attributes": {
+        "title": "Search Metrics",
+        "visState": {
+          "type": "metric",
+          "aggs": [
+            {
+              "id": "1",
+              "type": "count",
+              "schema": "metric"
+            },
+            {
+              "id": "2",
+              "type": "avg",
+              "schema": "metric",
+              "field": "duration"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "search-latency",
+      "type": "visualization",
+      "attributes": {
+        "title": "Search Latency",
+        "visState": {
+          "type": "line",
+          "aggs": [
+            {
+              "id": "1",
+              "type": "avg",
+              "schema": "metric",
+              "field": "duration"
+            },
+            {
+              "id": "2",
+              "type": "date_histogram",
+              "schema": "segment",
+              "field": "@timestamp"
+            }
+          ]
+        }
+      }
+    }
+  ]
+} 
