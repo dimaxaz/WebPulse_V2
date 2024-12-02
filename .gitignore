@@ -1,0 +1,21 @@
+# IDE
+.idea/
+.vscode/
+
+# Dependencies
+node_modules/
+vendor/
+__pycache__/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Build
+dist/
+build/
+*.pyc
+
+# Logs
+*.log 
